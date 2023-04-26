@@ -7,7 +7,6 @@ public class TextDisplay : MonoBehaviour
     [SerializeField]
     GameObject[] TextObjects;
 
-    [SerializeField]
     GameObject NextPanel;
 
     int textNum = 0;
@@ -40,10 +39,18 @@ public class TextDisplay : MonoBehaviour
                 else
                 {
                     NextPanel.SetActive(true);
-                    this.gameObject.SetActive(true);
+                    DanceManager dm = NextPanel.GetComponent<DanceManager>();
+                    if (dm != null)
+                        dm.StartGame();
+                    this.gameObject.SetActive(false);
                 }
             }
         }
+    }
+
+    public void SetNextPanel(GameObject nextPanel)
+    {
+        NextPanel = nextPanel;
     }
 
     public void StartEffect()

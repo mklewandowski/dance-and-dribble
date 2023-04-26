@@ -12,6 +12,9 @@ public class GameSceneManager : MonoBehaviour
     [SerializeField]
     GameObject TextPanel;
 
+    [SerializeField]
+    GameObject DancePanel;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +30,7 @@ public class GameSceneManager : MonoBehaviour
     public void StartGame()
     {
         TitlePanel.GetComponent<MoveNormal>().MoveUp();
+        TextPanel.GetComponent<TextDisplay>().SetNextPanel(DancePanel);
         TextPanel.SetActive(true);
         TextPanel.GetComponent<TextDisplay>().StartEffect();
     }

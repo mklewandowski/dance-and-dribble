@@ -16,6 +16,8 @@ public class ImageAnimation : MonoBehaviour
 
     Image image;
 
+    bool isPaused = false;
+
     void Start()
     {
         image = this.GetComponent<Image>();
@@ -24,11 +26,20 @@ public class ImageAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (AnimationFrames.Length > 0)
+        if (AnimationFrames.Length > 0 && !isPaused)
         {
             currTime += Time.deltaTime;
             currFrame = (int)Mathf.Floor(currTime / frameRate) % AnimationFrames.Length;
             image.sprite = AnimationFrames[currFrame];
         }
+    }
+
+    public void Pause()
+    {
+        isPaused = true;
+    }
+    public void Restart()
+    {
+        isPaused = false;
     }
 }
