@@ -32,7 +32,27 @@ public class GameSceneManager : MonoBehaviour
         TitlePanel.GetComponent<MoveNormal>().MoveUp();
         TextPanel.GetComponent<TextDisplay>().SetNextPanel(DancePanel);
         TextPanel.SetActive(true);
-        TextPanel.GetComponent<TextDisplay>().StartEffect();
+
+        string[] startStrings = {"Are you ready for an EXCITING game of basketball?","ME TOO!", "But before we start...", "Let's Dance!"};
+        int[] startSizes = {0, 0, 0, 1};
+
+        TextPanel.GetComponent<TextDisplay>().StartEffect(startStrings, startSizes);
+    }
+
+    public void EndGame()
+    {
+        // hide all game panels
+        DancePanel.GetComponent<MoveNormal>().MoveUp();
+
+        TextPanel.GetComponent<TextDisplay>().SetNextPanel(DancePanel);
+        TextPanel.SetActive(true);
+
+        string[] startStrings = {"Almost time for basketball", "But before that...", "Let's Dance!"};
+        int[] startSizes = {0, 0, 1};
+
+        TextPanel.GetComponent<TextDisplay>().StartEffect(startStrings, startSizes);
+
+
     }
 
 }

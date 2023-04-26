@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class DanceManager : MonoBehaviour
 {
     [SerializeField]
+    GameSceneManager gameSceneManager;
+
+    [SerializeField]
     GameObject GamePrompt;
     [SerializeField]
     RectTransform Timer;
@@ -20,6 +23,7 @@ public class DanceManager : MonoBehaviour
     float timerSizeMax = 290f;
 
     float totalDanceTime = 0f;
+    float totalDanceTimeMax = 20f;
 
     bool isPlaying = false;
 
@@ -35,9 +39,23 @@ public class DanceManager : MonoBehaviour
                 Steph.Pause();
                 Dray.Pause();
             }
+            else
+            {
+                totalDanceTime += Time.deltaTime;
+            }
+            if (totalDanceTime >= totalDanceTimeMax)
+            {
+                EndGame();
+            }
             GamePrompt.SetActive(gameTimer <= 0);
             UpdateTimerDisplay();
         }
+    }
+
+    void EndGame()
+    {
+        isPlaying = false;
+        gameSceneManager.EndGame();
     }
 
     void UpdateTimerDisplay()
@@ -47,6 +65,10 @@ public class DanceManager : MonoBehaviour
 
     public void StartGame()
     {
+        gameTimer = gameTimerMax;
+        totalDanceTime = 0f;
+        Steph.Restart();
+        Dray.Restart();
         isPlaying = true;
     }
 

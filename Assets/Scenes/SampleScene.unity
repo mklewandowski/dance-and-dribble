@@ -877,7 +877,7 @@ GameObject:
   - component: {fileID: 724746874}
   - component: {fileID: 724746876}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: SmallText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -962,7 +962,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 40
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -1015,7 +1015,6 @@ MonoBehaviour:
   GrowTo: 1.2
   ShrinkTo: 1
   Rate: 12
-  JuiceTime: 3
 --- !u!1 &742552742
 GameObject:
   m_ObjectHideFlags: 0
@@ -1550,7 +1549,7 @@ GameObject:
   - component: {fileID: 981641116}
   - component: {fileID: 981641118}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: LargeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1688,7 +1687,6 @@ MonoBehaviour:
   GrowTo: 1.2
   ShrinkTo: 1
   Rate: 12
-  JuiceTime: 3
 --- !u!1 &1002911724
 GameObject:
   m_ObjectHideFlags: 0
@@ -3145,9 +3143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec32c73ae6a768429d969343ca17b6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextObjects:
-  - {fileID: 724746872}
-  - {fileID: 981641114}
+  LargeText: {fileID: 981641114}
+  SmallText: {fileID: 724746872}
 --- !u!1 &1529512540
 GameObject:
   m_ObjectHideFlags: 0
@@ -4156,13 +4153,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1899651516}
   - component: {fileID: 1899651517}
+  - component: {fileID: 1899651518}
   m_Layer: 5
   m_Name: DancePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1899651516
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4185,10 +4183,10 @@ RectTransform:
   m_Father: {fileID: 1294001812}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 1500}
+  m_SizeDelta: {x: 768, y: 1024}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1899651517
 MonoBehaviour:
@@ -4202,10 +4200,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60765a6092968594cb2b185dd68c4a16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameSceneManager: {fileID: 319708540}
   GamePrompt: {fileID: 1057087871}
   Timer: {fileID: 493540158}
   Steph: {fileID: 1709667638}
   Dray: {fileID: 1301110979}
+--- !u!114 &1899651518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899651515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04a20d50c420ef04d897bda4324256cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movingUpEndPos: {x: 0, y: 1500}
+  movingDownEndPos: {x: 0, y: 0}
+  movingLeftEndPos: {x: 0, y: 0}
+  movingRightEndPos: {x: 0, y: 0}
+  movingUpVelocity: 3000
+  movingDownVelocity: -3000
+  movingLeftVelocity: -3000
+  movingRightVelocity: 3000
 --- !u!1 &1901607651
 GameObject:
   m_ObjectHideFlags: 0
