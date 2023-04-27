@@ -11,33 +11,51 @@ public class DanceManager : MonoBehaviour
     [SerializeField]
     GameObject GamePrompt;
     [SerializeField]
-    RectTransform Timer;
+    RectTransform DanceMeter;
+    [SerializeField]
+    RectTransform GameMeter;
 
     [SerializeField]
-    ImageAnimation Steph;
+    GameObject Steph;
     [SerializeField]
-    ImageAnimation Dray;
+    GameObject Dray;
+    ImageAnimation StephAnimation;
+    ImageAnimation DrayAnimation;
+    MovePattern StephMovement;
+    MovePattern DrayMovement;
+    MoveNormal StephMoveNormal;
+    MoveNormal DrayMoveNormal;
 
-    float gameTimer = 2f;
-    float gameTimerMax = 2f;
-    float timerSizeMax = 290f;
+    float danceTimer = 2f;
+    float danceTimerMax = 2f;
+    float danceMeterSizeMax = 290f;
 
     float totalDanceTime = 0f;
-    float totalDanceTimeMax = 20f;
+    float totalDanceTimeMax = 15f;
+    float gameMeterSizeMax = 390f;
 
     bool isPlaying = false;
+
+    void Init()
+    {
+        StephAnimation = Steph.GetComponent<ImageAnimation>();
+        DrayAnimation = Dray.GetComponent<ImageAnimation>();
+        StephMovement = Steph.GetComponent<MovePattern>();
+        DrayMovement = Dray.GetComponent<MovePattern>();
+        StephMoveNormal = Steph.GetComponent<MoveNormal>();
+        DrayMoveNormal = Dray.GetComponent<MoveNormal>();
+    }
 
     // Update is called once per frame
     void Update()
     {
         if (isPlaying)
         {
-            gameTimer -= Time.deltaTime;
-            if (gameTimer <= 0)
+            danceTimer -= Time.deltaTime;
+            if (danceTimer <= 0)
             {
-                gameTimer = 0f;
-                Steph.Pause();
-                Dray.Pause();
+                danceTimer = 0f;
+                Pause();
             }
             else
             {
@@ -47,9 +65,29 @@ public class DanceManager : MonoBehaviour
             {
                 EndGame();
             }
-            GamePrompt.SetActive(gameTimer <= 0);
-            UpdateTimerDisplay();
+            GamePrompt.SetActive(danceTimer <= 0);
+            UpdateDanceMeterDisplay();
+            UpdateGameTimerDisplay();
         }
+    }
+
+    void Pause()
+    {
+        StephAnimation.Pause();
+        DrayAnimation.Pause();
+        StephMovement.Pause();
+        DrayMovement.Pause();
+        StephMoveNormal.Pause();
+        DrayMoveNormal.Pause();
+    }
+    void Restart()
+    {
+        StephAnimation.Restart();
+        DrayAnimation.Restart();
+        StephMovement.Restart();
+        DrayMovement.Restart();
+        StephMoveNormal.Restart();
+        DrayMoveNormal.Restart();
     }
 
     void EndGame()
@@ -58,25 +96,28 @@ public class DanceManager : MonoBehaviour
         gameSceneManager.EndGame();
     }
 
-    void UpdateTimerDisplay()
+    void UpdateDanceMeterDisplay()
     {
-        Timer.sizeDelta = new Vector2(timerSizeMax * gameTimer / gameTimerMax, Timer.sizeDelta.y);
+        DanceMeter.sizeDelta = new Vector2(danceMeterSizeMax * danceTimer / danceTimerMax, DanceMeter.sizeDelta.y);
+    }
+    void UpdateGameTimerDisplay()
+    {
+        GameMeter.sizeDelta = new Vector2(gameMeterSizeMax * totalDanceTime / totalDanceTimeMax, GameMeter.sizeDelta.y);
     }
 
     public void StartGame()
     {
-        gameTimer = gameTimerMax;
+        Init();
+        danceTimer = danceTimerMax;
         totalDanceTime = 0f;
-        Steph.Restart();
-        Dray.Restart();
+        Restart();
         isPlaying = true;
     }
 
     public void HandleTap()
     {
-        gameTimer = gameTimer + 1f;
-        gameTimer = Mathf.Min(gameTimer, gameTimerMax);
-        Steph.Restart();
-        Dray.Restart();
+        danceTimer = danceTimer + 1f;
+        danceTimer = Mathf.Min(danceTimer, danceTimerMax);
+        Restart();
     }
 }

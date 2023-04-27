@@ -30,9 +30,14 @@ public class MoveNormal : MonoBehaviour
     [SerializeField]
     float movingRightVelocity = 10f;
 
+    bool isPaused = false;
+
     // Update is called once per frame
     void Update()
     {
+        if (isPaused)
+            return;
+
         if (currentMoveState == MoveState.MoveUp)
         {
             float newY = transform.localPosition.y + movingUpVelocity * Time.deltaTime;
@@ -91,5 +96,22 @@ public class MoveNormal : MonoBehaviour
     public void MoveRight()
     {
         currentMoveState = MoveState.MoveRight;
+    }
+    public void SetMovingLeftEndPos(Vector2 newPos)
+    {
+        movingLeftEndPos = newPos;
+    }
+    public void SetMovingRightEndPos(Vector2 newPos)
+    {
+        movingRightEndPos = newPos;
+    }
+
+    public void Pause()
+    {
+        isPaused = true;
+    }
+    public void Restart()
+    {
+        isPaused = false;
     }
 }

@@ -54,6 +54,7 @@ public class TextDisplay : MonoBehaviour
                 }
                 else
                 {
+                    NextPanel.SetActive(true);
                     NextPanel.GetComponent<MoveNormal>().MoveDown();
                     DanceManager dm = NextPanel.GetComponent<DanceManager>();
                     if (dm != null)

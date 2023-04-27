@@ -26,7 +26,10 @@ public class ImageAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (AnimationFrames.Length > 0 && !isPaused)
+        if (isPaused)
+            return;
+
+        if (AnimationFrames.Length > 0)
         {
             currTime += Time.deltaTime;
             currFrame = (int)Mathf.Floor(currTime / frameRate) % AnimationFrames.Length;
