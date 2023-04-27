@@ -19,6 +19,8 @@ public class ChewManager : MonoBehaviour
     Sprite OpenSprite;
 
     [SerializeField]
+    GameObject GameMeterContainer;
+    [SerializeField]
     RectTransform GameMeter;
     float gameMeterSizeMax = 390f;
 
@@ -26,7 +28,22 @@ public class ChewManager : MonoBehaviour
     int maxChews = 15;
     bool close = true;
 
+    float endGameTimer = 0;
+    float endGameTimerMax = 1f;
+
     bool isPlaying = false;
+
+    void Update()
+    {
+        if (endGameTimer > 0)
+        {
+            endGameTimer -= Time.deltaTime;
+            if (endGameTimer <= 0)
+            {
+                gameSceneManager.EndGame();
+            }
+        }
+    }
 
     void UpdateGameMeterDisplay()
     {
@@ -45,7 +62,8 @@ public class ChewManager : MonoBehaviour
     {
         audioManager.PlayWinSound();
         isPlaying = false;
-        gameSceneManager.EndGame();
+        GameMeterContainer.GetComponent<GrowAndShrink>().StartEffect();
+        endGameTimer = endGameTimerMax;
     }
 
     public void HandleTap()

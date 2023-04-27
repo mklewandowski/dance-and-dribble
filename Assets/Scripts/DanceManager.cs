@@ -16,6 +16,8 @@ public class DanceManager : MonoBehaviour
     [SerializeField]
     RectTransform DanceMeter;
     [SerializeField]
+    GameObject GameMeterContainer;
+    [SerializeField]
     RectTransform GameMeter;
 
     [SerializeField]
@@ -36,6 +38,9 @@ public class DanceManager : MonoBehaviour
     float totalDanceTime = 0f;
     float totalDanceTimeMax = 15f;
     float gameMeterSizeMax = 390f;
+
+    float endGameTimer = 0;
+    float endGameTimerMax = 1.5f;
 
     bool isPlaying = false;
 
@@ -72,6 +77,14 @@ public class DanceManager : MonoBehaviour
             UpdateDanceMeterDisplay();
             UpdateGameMeterDisplay();
         }
+        if (endGameTimer > 0)
+        {
+            endGameTimer -= Time.deltaTime;
+            if (endGameTimer <= 0)
+            {
+                gameSceneManager.EndGame();
+            }
+        }
     }
 
     void Pause()
@@ -97,7 +110,8 @@ public class DanceManager : MonoBehaviour
     {
         audioManager.PlayWinSound();
         isPlaying = false;
-        gameSceneManager.EndGame();
+        GameMeterContainer.GetComponent<GrowAndShrink>().StartEffect();
+        endGameTimer = endGameTimerMax;
     }
 
     void UpdateDanceMeterDisplay()

@@ -208,7 +208,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 86978286}
-  - component: {fileID: 86978287}
   - component: {fileID: 86978288}
   - component: {fileID: 86978289}
   m_Layer: 5
@@ -244,24 +243,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 1500}
   m_SizeDelta: {x: 768, y: 1024}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &86978287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 86978285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1edac5d8d5ae114f8afa518a29747b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioManager: {fileID: 319708543}
-  gameSceneManager: {fileID: 319708540}
-  Steph: {fileID: 1558570498}
-  CloseSprite: {fileID: 21300000, guid: 74c4cc85a8810064782c3d6ec78fad59, type: 3}
-  OpenSprite: {fileID: 21300000, guid: 9dba87d1b75d6234b85026ebaab18c2e, type: 3}
-  GameMeter: {fileID: 1773721009}
 --- !u!114 &86978288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -300,6 +281,7 @@ MonoBehaviour:
   KickSprite: {fileID: -351187419, guid: 9d4897f632a757e4abf4fdb216dd21f4, type: 3}
   RegularSprite: {fileID: -746551410, guid: 9d4897f632a757e4abf4fdb216dd21f4, type: 3}
   OtherPlayer: {fileID: 1091584089}
+  GameMeterContainer: {fileID: 2122231990}
   GameMeter: {fileID: 1773721009}
 --- !u!1 &221808894
 GameObject:
@@ -454,6 +436,7 @@ GameObject:
   - component: {fileID: 222603602}
   - component: {fileID: 222603604}
   - component: {fileID: 222603603}
+  - component: {fileID: 222603605}
   m_Layer: 5
   m_Name: EndMeterBack
   m_TagString: Untagged
@@ -521,6 +504,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 222603601}
   m_CullTransparentMesh: 1
+--- !u!114 &222603605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222603601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbda2ff3c158af540a21a5e0e72b170c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GrowTo: 1.2
+  ShrinkTo: 1
+  Rate: 12
 --- !u!1 &256200784
 GameObject:
   m_ObjectHideFlags: 0
@@ -2779,6 +2777,7 @@ MonoBehaviour:
   Steph: {fileID: 933520902}
   CloseSprite: {fileID: 21300000, guid: 74c4cc85a8810064782c3d6ec78fad59, type: 3}
   OpenSprite: {fileID: 21300000, guid: 9dba87d1b75d6234b85026ebaab18c2e, type: 3}
+  GameMeterContainer: {fileID: 1730779380}
   GameMeter: {fileID: 657276128}
 --- !u!1 &1139632341
 GameObject:
@@ -4602,6 +4601,7 @@ GameObject:
   - component: {fileID: 1730779381}
   - component: {fileID: 1730779383}
   - component: {fileID: 1730779382}
+  - component: {fileID: 1730779384}
   m_Layer: 5
   m_Name: EndMeterBack
   m_TagString: Untagged
@@ -4669,6 +4669,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1730779380}
   m_CullTransparentMesh: 1
+--- !u!114 &1730779384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1730779380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbda2ff3c158af540a21a5e0e72b170c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GrowTo: 1.2
+  ShrinkTo: 1
+  Rate: 12
 --- !u!1 &1773721008
 GameObject:
   m_ObjectHideFlags: 0
@@ -5125,6 +5140,7 @@ MonoBehaviour:
   gameSceneManager: {fileID: 319708540}
   GamePrompt: {fileID: 1057087871}
   DanceMeter: {fileID: 493540158}
+  GameMeterContainer: {fileID: 222603601}
   GameMeter: {fileID: 1955924331}
   Steph: {fileID: 1279610692}
   Dray: {fileID: 1969708734}
@@ -5881,6 +5897,7 @@ GameObject:
   - component: {fileID: 2122231991}
   - component: {fileID: 2122231993}
   - component: {fileID: 2122231992}
+  - component: {fileID: 2122231994}
   m_Layer: 5
   m_Name: EndMeterBack
   m_TagString: Untagged
@@ -5948,3 +5965,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2122231990}
   m_CullTransparentMesh: 1
+--- !u!114 &2122231994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2122231990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbda2ff3c158af540a21a5e0e72b170c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GrowTo: 1.2
+  ShrinkTo: 1
+  Rate: 12

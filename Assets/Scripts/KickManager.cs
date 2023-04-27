@@ -21,6 +21,8 @@ public class KickManager : MonoBehaviour
     GameObject OtherPlayer;
 
     [SerializeField]
+    GameObject GameMeterContainer;
+    [SerializeField]
     RectTransform GameMeter;
     float gameMeterSizeMax = 390f;
 
@@ -34,6 +36,9 @@ public class KickManager : MonoBehaviour
     float playerTimer = .5f;
     float playerTimerMax = 2f;
     bool movingLeft = true;
+
+    float endGameTimer = 0;
+    float endGameTimerMax = 1.5f;
 
     bool isPlaying = false;
 
@@ -73,6 +78,14 @@ public class KickManager : MonoBehaviour
                     OtherPlayer.GetComponent<MoveNormal>().MoveRight();
             }
         }
+        if (endGameTimer > 0)
+        {
+            endGameTimer -= Time.deltaTime;
+            if (endGameTimer <= 0)
+            {
+                gameSceneManager.EndGame();
+            }
+        }
     }
 
     void UpdateGameMeterDisplay()
@@ -92,7 +105,8 @@ public class KickManager : MonoBehaviour
     {
         audioManager.PlayWinSound();
         isPlaying = false;
-        gameSceneManager.EndGame();
+        GameMeterContainer.GetComponent<GrowAndShrink>().StartEffect();
+        endGameTimer = endGameTimerMax;
     }
 
     public void HandleTap()
