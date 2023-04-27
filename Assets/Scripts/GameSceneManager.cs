@@ -95,11 +95,11 @@ public class GameSceneManager : MonoBehaviour
         TextPanel.SetActive(true);
 
         string[][] startStrings = {
-            new string[] {"That was fun!", "Better practice...", "Mouthpiece Chewing!"},
-            new string[] {"Hot stuff!", "It's almost game time. But first...", "Mouthpiece Chewing!"},
-            new string[] {"You sure got it!", "We'll hit the court after...", "Mouthpiece Chewing!"}
+            new string[] {"That was fun!", "But for some reason we better practice...", "Mouthpiece chomping."},
+            new string[] {"Hot stuff!", "It's almost game time. But first...", "Let's chomp that mouthpiece."},
+            new string[] {"You sure got it!", "We'll hit the court after...", "We chomp that mouthpiece!"}
         };
-        int[] startSizes = {0, 0, 1};
+        int[] startSizes = {0, 0, 0};
         int arrayIndex = Random.Range(0, startStrings.Length);
 
         TextPanel.GetComponent<TextDisplay>().StartEffect(startStrings[arrayIndex], startSizes);
