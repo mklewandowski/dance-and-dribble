@@ -60,6 +60,10 @@ public class TextDisplay : MonoBehaviour
                     if (dm != null)
                         dm.StartGame();
                     this.gameObject.SetActive(false);
+                    ChewManager cm = NextPanel.GetComponent<ChewManager>();
+                    if (cm != null)
+                        cm.StartGame();
+                    this.gameObject.SetActive(false);
                 }
             }
         }

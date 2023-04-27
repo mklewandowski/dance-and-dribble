@@ -67,7 +67,7 @@ public class DanceManager : MonoBehaviour
             }
             GamePrompt.SetActive(danceTimer <= 0);
             UpdateDanceMeterDisplay();
-            UpdateGameTimerDisplay();
+            UpdateGameMeterDisplay();
         }
     }
 
@@ -100,7 +100,7 @@ public class DanceManager : MonoBehaviour
     {
         DanceMeter.sizeDelta = new Vector2(danceMeterSizeMax * danceTimer / danceTimerMax, DanceMeter.sizeDelta.y);
     }
-    void UpdateGameTimerDisplay()
+    void UpdateGameMeterDisplay()
     {
         GameMeter.sizeDelta = new Vector2(gameMeterSizeMax * totalDanceTime / totalDanceTimeMax, GameMeter.sizeDelta.y);
     }
@@ -116,6 +116,8 @@ public class DanceManager : MonoBehaviour
 
     public void HandleTap()
     {
+        if (!isPlaying)
+            return;
         danceTimer = danceTimer + 1f;
         danceTimer = Mathf.Min(danceTimer, danceTimerMax);
         Restart();

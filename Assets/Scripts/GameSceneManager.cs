@@ -14,6 +14,8 @@ public class GameSceneManager : MonoBehaviour
 
     [SerializeField]
     GameObject DancePanel;
+    [SerializeField]
+    GameObject ChewPanel;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +32,7 @@ public class GameSceneManager : MonoBehaviour
     public void StartGame()
     {
         TitlePanel.GetComponent<MoveNormal>().MoveUp();
-        TextPanel.GetComponent<TextDisplay>().SetNextPanel(DancePanel);
+        TextPanel.GetComponent<TextDisplay>().SetNextPanel(ChewPanel);
         TextPanel.SetActive(true);
 
         string[] startStrings = {"Are you ready for an EXCITING game of basketball?","ME TOO!", "But before we start...", "Let's Dance!"};
@@ -43,6 +45,7 @@ public class GameSceneManager : MonoBehaviour
     {
         // hide all game panels
         DancePanel.GetComponent<MoveNormal>().MoveUp();
+        ChewPanel.GetComponent<MoveNormal>().MoveUp();
 
         TextPanel.GetComponent<TextDisplay>().SetNextPanel(DancePanel);
         TextPanel.SetActive(true);
