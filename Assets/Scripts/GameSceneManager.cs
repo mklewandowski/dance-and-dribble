@@ -16,6 +16,8 @@ public class GameSceneManager : MonoBehaviour
     GameObject DancePanel;
     [SerializeField]
     GameObject ChewPanel;
+    [SerializeField]
+    GameObject KickPanel;
 
     bool lastWasDance = true;
 
@@ -49,6 +51,7 @@ public class GameSceneManager : MonoBehaviour
         // hide all game panels
         DancePanel.GetComponent<MoveNormal>().MoveUp();
         ChewPanel.GetComponent<MoveNormal>().MoveUp();
+        KickPanel.GetComponent<MoveNormal>().MoveUp();
 
         if (lastWasDance)
         {
@@ -64,7 +67,11 @@ public class GameSceneManager : MonoBehaviour
 
     void ChooseNextGame()
     {
-        ChooseChewGame();
+        int randVal = Random.Range(0, 2);
+        if (randVal == 0)
+            ChooseChewGame();
+        else
+            ChooseKickGame();
     }
 
     void ChooseDanceGame()
@@ -92,6 +99,21 @@ public class GameSceneManager : MonoBehaviour
             new string[] {"That was fun!", "Better practice...", "Mouthpiece Chewing!"},
             new string[] {"Hot stuff!", "It's almost game time. But first...", "Mouthpiece Chewing!"},
             new string[] {"You sure got it!", "We'll hit the court after...", "Mouthpiece Chewing!"}
+        };
+        int[] startSizes = {0, 0, 1};
+        int arrayIndex = Random.Range(0, startStrings.Length);
+
+        TextPanel.GetComponent<TextDisplay>().StartEffect(startStrings[arrayIndex], startSizes);
+    }
+    void ChooseKickGame()
+    {
+        TextPanel.GetComponent<TextDisplay>().SetNextPanel(KickPanel);
+        TextPanel.SetActive(true);
+
+        string[][] startStrings = {
+            new string[] {"The game will start any minute now!", "We can squeeze in one more practice!", "Kicking!"},
+            new string[] {"Before the game...", "We need to work on an important skill.", "Kicking!"},
+            new string[] {"Nice moves!", "But if you want to make it to the NBA you'll need to practice...", "Kicking!"}
         };
         int[] startSizes = {0, 0, 1};
         int arrayIndex = Random.Range(0, startStrings.Length);

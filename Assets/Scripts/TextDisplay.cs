@@ -63,6 +63,9 @@ public class TextDisplay : MonoBehaviour
                     ChewManager cm = NextPanel.GetComponent<ChewManager>();
                     if (cm != null)
                         cm.StartGame();
+                    KickManager km = NextPanel.GetComponent<KickManager>();
+                    if (km != null)
+                        km.StartGame();
                     this.gameObject.SetActive(false);
                 }
             }
