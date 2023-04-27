@@ -122,6 +122,8 @@ public class DanceManager : MonoBehaviour
     {
         if (!isPlaying)
             return;
+
+        audioManager.PlayDanceSound();
         danceTimer = danceTimer + 1f;
         danceTimer = Mathf.Min(danceTimer, danceTimerMax);
         Restart();

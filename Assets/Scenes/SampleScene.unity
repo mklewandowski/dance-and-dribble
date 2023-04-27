@@ -951,6 +951,7 @@ MonoBehaviour:
   HitSound: {fileID: 8300000, guid: d8a9f93946ae2af4b80fbd39191596ec, type: 3}
   WinSound: {fileID: 8300000, guid: 5a04948a54b4f6a488d625bd2dee3c49, type: 3}
   ChewSound: {fileID: 8300000, guid: c3a743f87e245db418b7baf1f33c5fed, type: 3}
+  DanceSound: {fileID: 8300000, guid: 0e1b5c8b9395edc439fe881448c6eb05, type: 3}
 --- !u!1 &493540157
 GameObject:
   m_ObjectHideFlags: 0
