@@ -24,6 +24,7 @@ public class GameSceneManager : MonoBehaviour
     GameObject FanPanel;
 
     bool lastWasDance = true;
+    int lastMiniGame = -1;
 
     // Start is called before the first frame update
     void Start()
@@ -69,7 +70,12 @@ public class GameSceneManager : MonoBehaviour
 
     void ChooseNextGame()
     {
-        int randVal = Random.Range(0, 3);
+        int randVal = 0;
+        do {
+            randVal = Random.Range(0, 3);
+        } while (randVal == lastMiniGame);
+        lastMiniGame = randVal;
+
         if (randVal == 0)
             ChooseChewGame();
         else if (randVal == 1)
