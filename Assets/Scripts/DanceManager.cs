@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class DanceManager : MonoBehaviour
 {
     [SerializeField]
+    AudioManager audioManager;
+
+    [SerializeField]
     GameSceneManager gameSceneManager;
 
     [SerializeField]
@@ -92,6 +95,7 @@ public class DanceManager : MonoBehaviour
 
     void EndGame()
     {
+        audioManager.PlayWinSound();
         isPlaying = false;
         gameSceneManager.EndGame();
     }

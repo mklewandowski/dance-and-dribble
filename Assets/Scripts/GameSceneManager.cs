@@ -6,6 +6,8 @@ using TMPro;
 
 public class GameSceneManager : MonoBehaviour
 {
+    AudioManager audioManager;
+
     [SerializeField]
     GameObject TitlePanel;
 
@@ -24,17 +26,14 @@ public class GameSceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioManager = this.GetComponent<AudioManager>();
         TitlePanel.GetComponent<MoveNormal>().MoveDown();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public void StartGame()
     {
+        audioManager.PlayStartSound();
+
         TitlePanel.GetComponent<MoveNormal>().MoveUp();
         TextPanel.GetComponent<TextDisplay>().SetNextPanel(DancePanel);
         lastWasDance = true;

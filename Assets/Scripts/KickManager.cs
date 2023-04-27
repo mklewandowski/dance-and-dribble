@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class KickManager : MonoBehaviour
 {
     [SerializeField]
+    AudioManager audioManager;
+
+    [SerializeField]
     GameSceneManager gameSceneManager;
 
     [SerializeField]
@@ -43,6 +46,7 @@ public class KickManager : MonoBehaviour
             {
                 // kick!
                 scoreThisKick = true;
+                audioManager.PlayHitSound();
                 kicks++;
                 UpdateGameMeterDisplay();
                 if (kicks >= maxKicks)
@@ -86,6 +90,7 @@ public class KickManager : MonoBehaviour
 
     void EndGame()
     {
+        audioManager.PlayWinSound();
         isPlaying = false;
         gameSceneManager.EndGame();
     }
@@ -95,6 +100,7 @@ public class KickManager : MonoBehaviour
         if (!isPlaying || kickTimer > 0)
             return;
 
+        audioManager.PlayKickSound();
         Dray.sprite = KickSprite;
         kickTimer = kickTimerMax;
         scoreThisKick = false;

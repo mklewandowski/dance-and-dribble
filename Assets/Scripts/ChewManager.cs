@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class ChewManager : MonoBehaviour
 {
     [SerializeField]
+    AudioManager audioManager;
+
+    [SerializeField]
     GameSceneManager gameSceneManager;
 
     [SerializeField]
@@ -40,6 +43,7 @@ public class ChewManager : MonoBehaviour
 
     void EndGame()
     {
+        audioManager.PlayWinSound();
         isPlaying = false;
         gameSceneManager.EndGame();
     }
@@ -53,6 +57,7 @@ public class ChewManager : MonoBehaviour
         if (close)
         {
             chews++;
+            audioManager.PlayChewSound();
             UpdateGameMeterDisplay();
             Steph.sprite = CloseSprite;
             if (chews >= maxChews)
