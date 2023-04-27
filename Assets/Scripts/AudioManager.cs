@@ -16,6 +16,8 @@ public class AudioManager : MonoBehaviour
     AudioClip ChewSound;
     [SerializeField]
     AudioClip DanceSound;
+    [SerializeField]
+    AudioClip CurseSound;
 
     void Awake()
     {
@@ -50,6 +52,11 @@ public class AudioManager : MonoBehaviour
     public void PlayDanceSound()
     {
         audioSource.PlayOneShot(DanceSound, 1f);
+    }
+
+    public void PlayCurseSound()
+    {
+        audioSource.PlayOneShot(CurseSound, 1f);
     }
 
 }

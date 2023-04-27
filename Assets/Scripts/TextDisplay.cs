@@ -66,6 +66,9 @@ public class TextDisplay : MonoBehaviour
                     KickManager km = NextPanel.GetComponent<KickManager>();
                     if (km != null)
                         km.StartGame();
+                    FanManager fm = NextPanel.GetComponent<FanManager>();
+                    if (fm != null)
+                        fm.StartGame();
                     this.gameObject.SetActive(false);
                 }
             }

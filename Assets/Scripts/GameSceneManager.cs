@@ -20,6 +20,8 @@ public class GameSceneManager : MonoBehaviour
     GameObject ChewPanel;
     [SerializeField]
     GameObject KickPanel;
+    [SerializeField]
+    GameObject FanPanel;
 
     bool lastWasDance = true;
 
@@ -51,6 +53,7 @@ public class GameSceneManager : MonoBehaviour
         DancePanel.GetComponent<MoveNormal>().MoveUp();
         ChewPanel.GetComponent<MoveNormal>().MoveUp();
         KickPanel.GetComponent<MoveNormal>().MoveUp();
+        FanPanel.GetComponent<MoveNormal>().MoveUp();
 
         if (lastWasDance)
         {
@@ -66,11 +69,13 @@ public class GameSceneManager : MonoBehaviour
 
     void ChooseNextGame()
     {
-        int randVal = Random.Range(0, 2);
+        int randVal = Random.Range(0, 3);
         if (randVal == 0)
             ChooseChewGame();
-        else
+        else if (randVal == 1)
             ChooseKickGame();
+        else if (randVal == 2)
+            ChooseFanGame();
     }
 
     void ChooseDanceGame()
@@ -115,6 +120,21 @@ public class GameSceneManager : MonoBehaviour
             new string[] {"Nice moves!", "But if you want to make it to the NBA you'll need to practice...", "Kicking!"}
         };
         int[] startSizes = {0, 0, 1};
+        int arrayIndex = Random.Range(0, startStrings.Length);
+
+        TextPanel.GetComponent<TextDisplay>().StartEffect(startStrings[arrayIndex], startSizes);
+    }
+    void ChooseFanGame()
+    {
+        TextPanel.GetComponent<TextDisplay>().SetNextPanel(FanPanel);
+        TextPanel.SetActive(true);
+
+        string[][] startStrings = {
+            new string[] {"Uh oh!", "The fans are getting agitated.", "Give them a piece of your mind!"},
+            new string[] {"Solid!", "The fans are gettig impatient.", "Tell them what you think!"},
+            new string[] {"I think we have some angry fans in the audience.", "We can't have that.", "Let's set them straight."}
+        };
+        int[] startSizes = {0, 0, 0};
         int arrayIndex = Random.Range(0, startStrings.Length);
 
         TextPanel.GetComponent<TextDisplay>().StartEffect(startStrings[arrayIndex], startSizes);
