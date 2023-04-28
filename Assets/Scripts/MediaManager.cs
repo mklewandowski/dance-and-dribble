@@ -13,7 +13,7 @@ public class MediaManager : MonoBehaviour
     GameSceneManager gameSceneManager;
 
     [SerializeField]
-    Image Dray;
+    Image Steph;
     [SerializeField]
     Sprite CloseSprite;
     [SerializeField]
@@ -26,26 +26,53 @@ public class MediaManager : MonoBehaviour
     float gameMeterSizeMax = 390f;
 
     [SerializeField]
-    GameObject[] CurseContainers;
-    [SerializeField]
-    TextMeshProUGUI[] CurseTexts;
-    int curseIndex = 0;
+    TextMeshProUGUI[] SmartTexts;
 
-    int curses = 0;
-    int maxCurses = 9;
+    int phrases = 0;
+    int maxPhrases = 3;
     bool close = true;
+    int phraseIndex = 0;
+
+    float phraseTimer = .1f;
+    float phaseTimerMax = .1f;
+
+    float talkTimer = 0f;
+    float talkTimerMax = .25f;
 
     float endGameTimer = 0;
-    float endGameTimerMax = 1f;
+    float endGameTimerMax = 2f;
 
     bool isPlaying = false;
 
-    string[] curseCharacters = {"q", "w", "r", "t", "y", "p", "s", "d", "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m",
-        "r", "s", "t", "l", "n", "r", "s", "t", "l", "n", "r", "s", "t", "l", "n", "r", "s", "t", "l", "n"};
-    string[] cursePeople = {" YOU", " HER", " HIM", " Y'ALL"};
+    string[][] phraseStrings = {
+        new string[] {"AT THE END OF THE DAY", "TO BE HONEST", "ALL I KNOW IS", "FOR WHAT IT'S WORTH", "IN THE END", "FOR NOW", "WHEN YOU ADD IT UP", "BOTTOMLINE"},
+        new string[] {"MY TEAM", "MY FAMILY", "THE TITLE", "THIS FRANCHISE", "THE CHAMPIONSHIP", "THIS CITY", "THIS TEAM", "HOT N SPICY BBQ CHIPS", "THAT KID", "THAT ORPHAN", "THAT SICK FAN", "THE COMMUNITY", "THIS STATE", "THIS COUNTRY"},
+        new string[] {"IS EVERYTHING", "IS ALL THAT MATTERS", "IS THE ONLY THING", "IS WHAT IT'S ABOUT", "IS WHERE MY HEART IS"}
+    };
 
     void Update()
     {
+        if (phraseTimer > 0 && phrases < maxPhrases)
+        {
+            phraseTimer -= Time.deltaTime;
+            if (phraseTimer <= 0)
+            {
+                phraseTimer = phaseTimerMax;
+                phraseIndex++;
+                if (phraseIndex >= phraseStrings[phrases].Length)
+                    phraseIndex = 0;
+
+                SmartTexts[phrases].text = phraseStrings[phrases][phraseIndex];
+            }
+        }
+        if (talkTimer > 0)
+        {
+            talkTimer -= Time.deltaTime;
+            if (talkTimer <= 0)
+            {
+                Steph.sprite = CloseSprite;
+            }
+        }
         if (endGameTimer > 0)
         {
             endGameTimer -= Time.deltaTime;
@@ -58,14 +85,18 @@ public class MediaManager : MonoBehaviour
 
     void UpdateGameMeterDisplay()
     {
-        GameMeter.sizeDelta = new Vector2(gameMeterSizeMax * (float)curses / (float)maxCurses, GameMeter.sizeDelta.y);
+        GameMeter.sizeDelta = new Vector2(gameMeterSizeMax * (float)phrases / (float)maxPhrases, GameMeter.sizeDelta.y);
     }
 
     public void StartGame()
     {
-        curses = 0;
-        curseIndex = 0;
-        Dray.sprite = CloseSprite;
+        foreach(TextMeshProUGUI st in SmartTexts)
+        {
+            st.text = "";
+        }
+        phrases = 0;
+        phraseIndex = 0;
+        Steph.sprite = CloseSprite;
         UpdateGameMeterDisplay();
         isPlaying = true;
     }
@@ -83,43 +114,17 @@ public class MediaManager : MonoBehaviour
         if (!isPlaying)
             return;
 
-        close = !close;
-        if (close)
-        {
-            Dray.sprite = CloseSprite;
-        }
-        else
-        {
-            Dray.sprite = OpenSprite;
-            curses++;
-            audioManager.PlayCurseSound();
-            UpdateGameMeterDisplay();
-            ShowCurse();
-            curseIndex++;
-            if (curseIndex >= CurseContainers.Length)
-                curseIndex = 0;
-            if (curses >= maxCurses)
-            {
-                EndGame();
-            }
-        }
-    }
+        Steph.sprite = OpenSprite;
+        talkTimer = talkTimerMax;
+        phrases++;
+        audioManager.PlayDanceSound();
+        UpdateGameMeterDisplay();
 
-    void ShowCurse()
-    {
-        string curseString = "";
-        int charIndex = Random.Range(0, curseCharacters.Length);
-        curseString = curseString + curseCharacters[charIndex];
-        curseString = curseString + "**";
-        charIndex = Random.Range(0, curseCharacters.Length);
-        curseString = curseString + curseCharacters[charIndex];
-        charIndex = Random.Range(0, cursePeople.Length);
-        curseString = curseString + cursePeople[charIndex];
-        curseString = curseString + "!!!";
-        CurseTexts[curseIndex].text = curseString;
-        CurseContainers[curseIndex].transform.localScale = new Vector3(.1f, .1f, .1f);
-        CurseContainers[curseIndex].SetActive(true);
-        CurseContainers[curseIndex].GetComponent<GrowAndShrink>().StartEffect();
-        CurseContainers[curseIndex].GetComponent<TimedHide>().StartEffect();
+        phraseIndex = 0;
+        if (phrases >= maxPhrases)
+        {
+            EndGame();
+        }
+
     }
 }

@@ -239,11 +239,11 @@ public class GameSceneManager : MonoBehaviour
         TextPanel.SetActive(true);
 
         string[][] startStrings = {
-            new string[] {"Oh no. The refs are tired of your antics!", "They want to give you a technical foul!", "When he's not looking, throw a tantrum!"},
-            new string[] {"You need new social media content!", "Or you risk losing your lucrative potato chip sponsorship!", "Let's grab some fresh selfies!"},
-            new string[] {"Fat Lever has more followers than you!", "You need to work on your brand management!", "Let's start with some poppin' selfies!"}
+            new string[] {"The media wants you to make a statement!", "Try to say something smart!"},
+            new string[] {"We better take a break and talk to the media.", "Don't forget to mention your lucrative potato chip sponsorship!"},
+            new string[] {"The media wants an interview!", "Be sure to say something motivational!"}
         };
-        int[] startSizes = {0, 0, 0};
+        int[] startSizes = {0, 0};
         int arrayIndex = Random.Range(0, startStrings.Length);
 
         TextPanel.GetComponent<TextDisplay>().StartEffect(startStrings[arrayIndex], startSizes);
