@@ -1,8 +1,8 @@
 # Dance 'n' Dribble
-Inspired by Double Dunk and the NBA playoffs, Dance 'n' Dribble is a basketball simulation.  It just doesn't feature much basketball. Dance, curse out a ref, promote potato chips, and do a bunch of other odd things as you play the role of a professional athlete.
+Inspired by Double Dunk and the NBA playoffs, Dance 'n' Dribble is a basketball simulation.  It just doesn't feature much basketball. Dance, curse out a ref, promote potato chips, and do a bunch of other odd things as you take on the role of a professional athlete.
 
 ## Gameplay
-Tap or click on the game to play each of the mini-games.
+Follow onscreen instructions and tap or click to play each of the mini-games.
 
 ![Dance 'n' Dribble gameplay](https://github.com/mklewandowski/dance-and-dribble/blob/main/Assets/Images/dance-dribble-gameplay.gif?raw=true)
 
