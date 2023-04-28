@@ -70,6 +70,10 @@ public class TextDisplay : MonoBehaviour
                     if (fm != null)
                         fm.StartGame();
                     this.gameObject.SetActive(false);
+                    PunchManager pm = NextPanel.GetComponent<PunchManager>();
+                    if (pm != null)
+                        pm.StartGame();
+                    this.gameObject.SetActive(false);
                 }
             }
         }
