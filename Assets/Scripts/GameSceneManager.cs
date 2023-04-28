@@ -44,7 +44,7 @@ public class GameSceneManager : MonoBehaviour
         audioManager.PlayStartSound();
 
         TitlePanel.GetComponent<MoveNormal>().MoveUp();
-        TextPanel.GetComponent<TextDisplay>().SetNextPanel(DancePanel);
+        TextPanel.GetComponent<TextDisplay>().SetNextPanel(FanPanel);
         lastWasDance = true;
         TextPanel.SetActive(true);
 

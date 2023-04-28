@@ -40,7 +40,9 @@ public class FanManager : MonoBehaviour
 
     bool isPlaying = false;
 
-    string[] curseCharacters = {"!", "@", "#", "$", "?", "^", "&", "*"};
+    string[] curseCharacters = {"q", "w", "r", "t", "y", "p", "s", "d", "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m",
+        "r", "s", "t", "l", "n", "r", "s", "t", "l", "n", "r", "s", "t", "l", "n", "r", "s", "t", "l", "n"};
+    string[] cursePeople = {" YOU", " HER", " HIM", " Y'ALL"};
 
     void Update()
     {
@@ -105,14 +107,15 @@ public class FanManager : MonoBehaviour
 
     void ShowCurse()
     {
-        int maxCurseChars = 4;
         string curseString = "";
-        for (int x = 0; x < maxCurseChars; x++)
-        {
-            int charIndex = Random.Range(0, curseCharacters.Length);
-            curseString = curseString + curseCharacters[charIndex];
-        }
-        curseString = curseString + "!";
+        int charIndex = Random.Range(0, curseCharacters.Length);
+        curseString = curseString + curseCharacters[charIndex];
+        curseString = curseString + "**";
+        charIndex = Random.Range(0, curseCharacters.Length);
+        curseString = curseString + curseCharacters[charIndex];
+        charIndex = Random.Range(0, cursePeople.Length);
+        curseString = curseString + cursePeople[charIndex];
+        curseString = curseString + "!!!";
         CurseTexts[curseIndex].text = curseString;
         CurseContainers[curseIndex].transform.localScale = new Vector3(.1f, .1f, .1f);
         CurseContainers[curseIndex].SetActive(true);
