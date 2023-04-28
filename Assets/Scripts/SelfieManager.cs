@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FashionManager : MonoBehaviour
+public class SelfieManager : MonoBehaviour
 {
     [SerializeField]
     AudioManager audioManager;
@@ -12,19 +12,17 @@ public class FashionManager : MonoBehaviour
     GameSceneManager gameSceneManager;
 
     [SerializeField]
-    Image Head;
+    GameObject Photo;
+    [SerializeField]
+    Image Mouth;
     [SerializeField]
     Image Eyes;
     [SerializeField]
-    Image Shirt;
+    Sprite[] EyeSprites;
     [SerializeField]
-    Sprite[] Hats;
+    Sprite[] MouthSprites;
     [SerializeField]
-    Sprite[] Glasses;
-    [SerializeField]
-    Sprite[] Shirts;
-    [SerializeField]
-    Sprite EmptySprite;
+    GameObject Flash;
 
     [SerializeField]
     GameObject GameMeterContainer;
@@ -32,11 +30,13 @@ public class FashionManager : MonoBehaviour
     RectTransform GameMeter;
     float gameMeterSizeMax = 390f;
 
-    int fashions = 0;
-    int maxFashions = 10;
+    int selfies = 0;
+    int maxSelfies = 6;
 
     float endGameTimer = 0;
     float endGameTimerMax = 2f;
+    float flashTimer = 0;
+    float flashTimerMax = .1f;
 
     bool isPlaying = false;
 
@@ -50,19 +50,26 @@ public class FashionManager : MonoBehaviour
                 gameSceneManager.EndGame();
             }
         }
+        if (flashTimer > 0)
+        {
+            flashTimer -= Time.deltaTime;
+            if (flashTimer <= 0)
+            {
+                Flash.SetActive(false);
+            }
+        }
     }
 
     void UpdateGameMeterDisplay()
     {
-        GameMeter.sizeDelta = new Vector2(gameMeterSizeMax * (float)fashions / (float)maxFashions, GameMeter.sizeDelta.y);
+        GameMeter.sizeDelta = new Vector2(gameMeterSizeMax * (float)selfies / (float)maxSelfies, GameMeter.sizeDelta.y);
     }
 
     public void StartGame()
     {
-        fashions = 0;
-        Head.sprite = EmptySprite;
-        Eyes.sprite = EmptySprite;
-        Shirt.sprite = EmptySprite;
+        selfies = 0;
+        Flash.SetActive(false);
+        Photo.SetActive(false);
         UpdateGameMeterDisplay();
         isPlaying = true;
     }
@@ -80,20 +87,24 @@ public class FashionManager : MonoBehaviour
         if (!isPlaying)
             return;
 
-        fashions++;
+        selfies++;
         audioManager.PlayDanceSound();
         UpdateGameMeterDisplay();
-        ShowFashion();
-        if (fashions >= maxFashions)
+        ShowPhoto();
+        if (selfies >= maxSelfies)
         {
             EndGame();
         }
     }
 
-    void ShowFashion()
+    void ShowPhoto()
     {
-        Head.sprite = Hats[Random.Range(0, Hats.Length - 1)];
-        Eyes.sprite = Glasses[Random.Range(0, Glasses.Length - 1)];
-        Shirt.sprite = Shirts[Random.Range(0, Shirts.Length - 1)];
+        Photo.transform.localScale = new Vector3(.1f, .1f, .1f);
+        Photo.SetActive(true);
+        Mouth.sprite = MouthSprites[Random.Range(0, MouthSprites.Length - 1)];
+        Eyes.sprite = EyeSprites[Random.Range(0, EyeSprites.Length - 1)];
+        Photo.GetComponent<GrowAndShrink>().StartEffect();
+        Flash.SetActive(true);
+        flashTimer = flashTimerMax;
     }
 }

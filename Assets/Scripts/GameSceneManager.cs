@@ -26,6 +26,8 @@ public class GameSceneManager : MonoBehaviour
     GameObject PunchPanel;
     [SerializeField]
     GameObject FashionPanel;
+    [SerializeField]
+    GameObject SelfiePanel;
 
     bool lastWasDance = true;
     int lastMiniGame = -1;
@@ -61,6 +63,7 @@ public class GameSceneManager : MonoBehaviour
         FanPanel.GetComponent<MoveNormal>().MoveUp();
         PunchPanel.GetComponent<MoveNormal>().MoveUp();
         FashionPanel.GetComponent<MoveNormal>().MoveUp();
+        SelfiePanel.GetComponent<MoveNormal>().MoveUp();
 
         if (lastWasDance)
         {
@@ -78,7 +81,7 @@ public class GameSceneManager : MonoBehaviour
     {
         int randVal = 0;
         do {
-            randVal = Random.Range(0, 5);
+            randVal = Random.Range(0, 6);
         } while (randVal == lastMiniGame);
         lastMiniGame = randVal;
 
@@ -92,6 +95,8 @@ public class GameSceneManager : MonoBehaviour
             ChoosePunchGame();
         else if (randVal == 4)
             ChooseFashionGame();
+        else if (randVal == 5)
+            ChooseSelfieGame();
     }
 
     void ChooseDanceGame()
@@ -135,7 +140,7 @@ public class GameSceneManager : MonoBehaviour
         string[][] startStrings = {
             new string[] {"The game will start any minute now!", "Luckily, we can squeeze in one more practice!", "Every pro needs to perfect sack kicks."},
             new string[] {"Before the game...", "We need to work on an important skill.", "Kicking opponents in the balls."},
-            new string[] {"Nice moves!", "But if you want to make it to the NBA you'll need to practice...", "Kicking opponents in the nuts."}
+            new string[] {"Nice moves!", "But if you want to make it to the big time you'll need to practice...", "Kicking opponents in the nuts."}
         };
         int[] startSizes = {0, 0, 0};
         int arrayIndex = Random.Range(0, startStrings.Length);
@@ -181,6 +186,21 @@ public class GameSceneManager : MonoBehaviour
             new string[] {"It's important to look good on and off the court.", "We have a little time.", "Let's try some fashions!"},
             new string[] {"There's a sale at Clothes-Mart!", "I have my dad's credit card.", "Let's try on some hot fashions!"},
             new string[] {"A real pro needs real style.", "Maybe a fuchsia hat?", "It's fashion time!"}
+        };
+        int[] startSizes = {0, 0, 0};
+        int arrayIndex = Random.Range(0, startStrings.Length);
+
+        TextPanel.GetComponent<TextDisplay>().StartEffect(startStrings[arrayIndex], startSizes);
+    }
+    void ChooseSelfieGame()
+    {
+        TextPanel.GetComponent<TextDisplay>().SetNextPanel(SelfiePanel);
+        TextPanel.SetActive(true);
+
+        string[][] startStrings = {
+            new string[] {"What's that? You're not even on social media?", "You have a lot to learn about the pros, kid!", "We better take some selfies!"},
+            new string[] {"You need new social media content!", "Or you risk losing your lucrative potato chip sponsorship!", "Let's grab some fresh selfies!"},
+            new string[] {"Fat Lever has more followers than you!", "You need to work on your brand management!", "Let's start with some poppin' selfies!"}
         };
         int[] startSizes = {0, 0, 0};
         int arrayIndex = Random.Range(0, startStrings.Length);

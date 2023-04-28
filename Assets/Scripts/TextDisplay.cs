@@ -74,6 +74,9 @@ public class TextDisplay : MonoBehaviour
                     FashionManager fam = NextPanel.GetComponent<FashionManager>();
                     if (fam != null)
                         fam.StartGame();
+                    SelfieManager sm = NextPanel.GetComponent<SelfieManager>();
+                    if (sm != null)
+                        sm.StartGame();
 
                     this.gameObject.SetActive(false);
                 }
