@@ -59,7 +59,6 @@ public class TextDisplay : MonoBehaviour
                     DanceManager dm = NextPanel.GetComponent<DanceManager>();
                     if (dm != null)
                         dm.StartGame();
-                    this.gameObject.SetActive(false);
                     ChewManager cm = NextPanel.GetComponent<ChewManager>();
                     if (cm != null)
                         cm.StartGame();
@@ -69,10 +68,13 @@ public class TextDisplay : MonoBehaviour
                     FanManager fm = NextPanel.GetComponent<FanManager>();
                     if (fm != null)
                         fm.StartGame();
-                    this.gameObject.SetActive(false);
                     PunchManager pm = NextPanel.GetComponent<PunchManager>();
                     if (pm != null)
                         pm.StartGame();
+                    FashionManager fam = NextPanel.GetComponent<FashionManager>();
+                    if (fam != null)
+                        fam.StartGame();
+
                     this.gameObject.SetActive(false);
                 }
             }

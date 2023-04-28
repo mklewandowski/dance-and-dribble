@@ -24,6 +24,8 @@ public class GameSceneManager : MonoBehaviour
     GameObject FanPanel;
     [SerializeField]
     GameObject PunchPanel;
+    [SerializeField]
+    GameObject FashionPanel;
 
     bool lastWasDance = true;
     int lastMiniGame = -1;
@@ -58,6 +60,7 @@ public class GameSceneManager : MonoBehaviour
         KickPanel.GetComponent<MoveNormal>().MoveUp();
         FanPanel.GetComponent<MoveNormal>().MoveUp();
         PunchPanel.GetComponent<MoveNormal>().MoveUp();
+        FashionPanel.GetComponent<MoveNormal>().MoveUp();
 
         if (lastWasDance)
         {
@@ -75,7 +78,7 @@ public class GameSceneManager : MonoBehaviour
     {
         int randVal = 0;
         do {
-            randVal = Random.Range(0, 4);
+            randVal = Random.Range(0, 5);
         } while (randVal == lastMiniGame);
         lastMiniGame = randVal;
 
@@ -87,6 +90,8 @@ public class GameSceneManager : MonoBehaviour
             ChooseFanGame();
         else if (randVal == 3)
             ChoosePunchGame();
+        else if (randVal == 4)
+            ChooseFashionGame();
     }
 
     void ChooseDanceGame()
@@ -161,6 +166,21 @@ public class GameSceneManager : MonoBehaviour
             new string[] {"Bad news. A young teammate is acting up.", "As a real pro, it's your job...", "To punch him in the face."},
             new string[] {"A rookie teammate is gloating about his contract.", "You're our only hope.", "Go punch him in the face."},
             new string[] {"A teammate outscored you in practice!", "There's only one thing that you can do...", "Punch him in the face."}
+        };
+        int[] startSizes = {0, 0, 0};
+        int arrayIndex = Random.Range(0, startStrings.Length);
+
+        TextPanel.GetComponent<TextDisplay>().StartEffect(startStrings[arrayIndex], startSizes);
+    }
+    void ChooseFashionGame()
+    {
+        TextPanel.GetComponent<TextDisplay>().SetNextPanel(FashionPanel);
+        TextPanel.SetActive(true);
+
+        string[][] startStrings = {
+            new string[] {"It's important to look good on and off the court.", "We have a little time.", "Let's try some fashions!"},
+            new string[] {"There's a sale at Clothes-Mart!", "I have my dad's credit card.", "Let's try on some hot fashions!"},
+            new string[] {"A real pro needs real style.", "Maybe a fuchsia hat?", "It's fashion time!"}
         };
         int[] startSizes = {0, 0, 0};
         int arrayIndex = Random.Range(0, startStrings.Length);
