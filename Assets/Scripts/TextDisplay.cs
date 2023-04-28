@@ -77,6 +77,12 @@ public class TextDisplay : MonoBehaviour
                     SelfieManager sm = NextPanel.GetComponent<SelfieManager>();
                     if (sm != null)
                         sm.StartGame();
+                    RefManager rm = NextPanel.GetComponent<RefManager>();
+                    if (rm != null)
+                        rm.StartGame();
+                    MediaManager mm = NextPanel.GetComponent<MediaManager>();
+                    if (mm != null)
+                        mm.StartGame();
 
                     this.gameObject.SetActive(false);
                 }

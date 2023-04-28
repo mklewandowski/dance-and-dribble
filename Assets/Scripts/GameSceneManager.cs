@@ -28,6 +28,10 @@ public class GameSceneManager : MonoBehaviour
     GameObject FashionPanel;
     [SerializeField]
     GameObject SelfiePanel;
+    [SerializeField]
+    GameObject RefPanel;
+    [SerializeField]
+    GameObject MediaPanel;
 
     bool lastWasDance = true;
     int lastMiniGame = -1;
@@ -44,7 +48,7 @@ public class GameSceneManager : MonoBehaviour
         audioManager.PlayStartSound();
 
         TitlePanel.GetComponent<MoveNormal>().MoveUp();
-        TextPanel.GetComponent<TextDisplay>().SetNextPanel(FanPanel);
+        TextPanel.GetComponent<TextDisplay>().SetNextPanel(DancePanel);
         lastWasDance = true;
         TextPanel.SetActive(true);
 
@@ -64,6 +68,8 @@ public class GameSceneManager : MonoBehaviour
         PunchPanel.GetComponent<MoveNormal>().MoveUp();
         FashionPanel.GetComponent<MoveNormal>().MoveUp();
         SelfiePanel.GetComponent<MoveNormal>().MoveUp();
+        RefPanel.GetComponent<MoveNormal>().MoveUp();
+        MediaPanel.GetComponent<MoveNormal>().MoveUp();
 
         if (lastWasDance)
         {
@@ -81,7 +87,7 @@ public class GameSceneManager : MonoBehaviour
     {
         int randVal = 0;
         do {
-            randVal = Random.Range(0, 6);
+            randVal = Random.Range(0, 8);
         } while (randVal == lastMiniGame);
         lastMiniGame = randVal;
 
@@ -97,6 +103,10 @@ public class GameSceneManager : MonoBehaviour
             ChooseFashionGame();
         else if (randVal == 5)
             ChooseSelfieGame();
+        else if (randVal == 6)
+            ChooseMediaGame();
+        else if (randVal == 7)
+            ChooseRefGame();
     }
 
     void ChooseDanceGame()
@@ -199,6 +209,37 @@ public class GameSceneManager : MonoBehaviour
 
         string[][] startStrings = {
             new string[] {"What's that? You're not even on social media?", "You have a lot to learn about the pros, kid!", "We better take some selfies!"},
+            new string[] {"You need new social media content!", "Or you risk losing your lucrative potato chip sponsorship!", "Let's grab some fresh selfies!"},
+            new string[] {"Fat Lever has more followers than you!", "You need to work on your brand management!", "Let's start with some poppin' selfies!"}
+        };
+        int[] startSizes = {0, 0, 0};
+        int arrayIndex = Random.Range(0, startStrings.Length);
+
+        TextPanel.GetComponent<TextDisplay>().StartEffect(startStrings[arrayIndex], startSizes);
+    }
+
+    void ChooseRefGame()
+    {
+        TextPanel.GetComponent<TextDisplay>().SetNextPanel(RefPanel);
+        TextPanel.SetActive(true);
+
+        string[][] startStrings = {
+            new string[] {"Oh no. The ref is tired of your antics!", "He wants to give you a technical foul!", "When he's not looking, throw a tantrum!"},
+            new string[] {"The ref has had it with all this dancing!", "Obviously the fix is in.", "When he turns around, throw a tantrum!"},
+            new string[] {"The ref says it's time to play ball!", "I don't think so!", "When he's not looking, throw a tantrum!"}
+        };
+        int[] startSizes = {0, 0, 0};
+        int arrayIndex = Random.Range(0, startStrings.Length);
+
+        TextPanel.GetComponent<TextDisplay>().StartEffect(startStrings[arrayIndex], startSizes);
+    }
+    void ChooseMediaGame()
+    {
+        TextPanel.GetComponent<TextDisplay>().SetNextPanel(MediaPanel);
+        TextPanel.SetActive(true);
+
+        string[][] startStrings = {
+            new string[] {"Oh no. The refs are tired of your antics!", "They want to give you a technical foul!", "When he's not looking, throw a tantrum!"},
             new string[] {"You need new social media content!", "Or you risk losing your lucrative potato chip sponsorship!", "Let's grab some fresh selfies!"},
             new string[] {"Fat Lever has more followers than you!", "You need to work on your brand management!", "Let's start with some poppin' selfies!"}
         };
