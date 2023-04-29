@@ -58,6 +58,10 @@ public class SelfieManager : MonoBehaviour
                 Flash.SetActive(false);
             }
         }
+        if (Input.GetKeyDown("space"))
+        {
+            HandleTap();
+        }
     }
 
     void UpdateGameMeterDisplay()

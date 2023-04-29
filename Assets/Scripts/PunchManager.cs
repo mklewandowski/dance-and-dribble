@@ -86,6 +86,10 @@ public class PunchManager : MonoBehaviour
                 gameSceneManager.EndGame();
             }
         }
+        if (Input.GetKeyDown("space"))
+        {
+            HandleTap();
+        }
     }
 
     void UpdateGameMeterDisplay()

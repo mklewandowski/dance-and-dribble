@@ -85,6 +85,10 @@ public class DanceManager : MonoBehaviour
                 gameSceneManager.EndGame();
             }
         }
+        if (Input.GetKeyDown("space"))
+        {
+            HandleTap();
+        }
     }
 
     void Pause()

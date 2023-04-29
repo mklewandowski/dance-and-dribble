@@ -36,6 +36,8 @@ public class GameSceneManager : MonoBehaviour
     bool lastWasDance = true;
     int lastMiniGame = -1;
 
+    bool started = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,8 +45,20 @@ public class GameSceneManager : MonoBehaviour
         TitlePanel.GetComponent<MoveNormal>().MoveDown();
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown("space"))
+        {
+            StartGame();
+        }
+    }
+
     public void StartGame()
     {
+        if (started)
+            return;
+
+        started = true;
         audioManager.PlayStartSound();
 
         TitlePanel.GetComponent<MoveNormal>().MoveUp();
